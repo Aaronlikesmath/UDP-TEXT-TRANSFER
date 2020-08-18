@@ -34,8 +34,8 @@ while True:
     decoded_data = data.decode("utf-8")
     # Adding Ip address to list if received connection packet and IP not already in list
     if decoded_data == "CONNECTED: 1000":
-        if IPadress in IPlist:
-            IPlist = IPlist.append(IPadress)
+        if IPlist.count(IPadress) == 0:
+            IPlist.append(IPadress)
     elif decoded_data == "Return: 500":
         US.sendpacket("Returned: 400", IPadress, RelayPort)
     else:
@@ -45,7 +45,5 @@ while True:
         relaymsg = f"\nMessage: {decoded_data} \n From: {IPadress}"
         # Relaying data to other clients
         for Ipadd in IPlist:
-            if Ipadd == IPadress:
-                break
-            US.sendpacket(relaymsg, Ipadd, RelayPort)
-        print (IPlist)
+            if Ipadd != IPadress:
+                US.sendpacket(relaymsg, Ipadd, RelayPort)
