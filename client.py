@@ -20,20 +20,21 @@ US.init()
 
 # Starting client
 while True:
+    Statuscode = False
     US.sendpacket("CONNECTED: 1000", IP, PORT)
-    if input("Do you want to send a message? [Y/N(N will also refresh msges)]").lower() == "y":
+    SelectDo = input("Do you want to send a message? [Y/N(N will also refresh msges)/T(For serverping)]").lower()
+    if SelectDo == "y":
         # SENDING DATA
         Send_data = input("What MSG do you want to send?: ")
         US.sendpacket(Send_data, IP, PORT)
         print (f"Sent: {Send_data} \n Time: {datetime.now()}")
+    if SelectDo == "T":
+        US.sendpacket("Return: 500", IP, PORT)
     # This code will parse and receive DATA
-    # Asking for return packet (Just to make sure that the recvfrom doesnt get stuck until there new messages)
-    US.sendpacket("Return: 500", IP, PORT)
     data, address = US.s.recvfrom(4096)
     decoded = data.decode("utf-8")
     if decoded == "RECEIVED: 1100":
         print ("\nMessage has been delivered\n")
-    elif decoded == "Returned: 400":
-        print ("\n Server Pinged \n")
-    else:
+        Statuscode = True
+    if Statuscode == False:
         print (decoded)
