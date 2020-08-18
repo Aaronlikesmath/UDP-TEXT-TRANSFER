@@ -28,7 +28,7 @@ while True:
         Send_data = input("What MSG do you want to send?: ")
         US.sendpacket(Send_data, IP, PORT)
         print (f"Sent: {Send_data} \n Time: {datetime.now()}")
-    if SelectDo == "T":
+    if SelectDo == "t":
         US.sendpacket("Return: 500", IP, PORT)
     # This code will parse and receive DATA
     data, address = US.s.recvfrom(4096)
