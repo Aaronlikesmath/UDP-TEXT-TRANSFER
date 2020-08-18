@@ -40,10 +40,10 @@ while True:
         US.sendpacket("Returned: 400", IPadress, RelayPort)
     else:
         # Printing data of received packet
-        US.sendpacket("RECEIVED: 1100", IPadress, 12000)
         print (f"\n \n Received: {decoded_data} \n From: {IPadress} \n Time: {datetime.now()} \n \n")
         relaymsg = f"\nMessage: {decoded_data} \n From: {IPadress}"
         # Relaying data to other clients
         for Ipadd in IPlist:
             if Ipadd != IPadress:
                 US.sendpacket(relaymsg, Ipadd, RelayPort)
+        US.sendpacket("RECEIVED: 1100", IPadress, 12000)
