@@ -35,6 +35,7 @@ while True:
     decoded = data.decode("utf-8")
     if decoded == "RECEIVED: 1100":
         print ("\nMessage has been delivered\n")
+    if decoded == "RETURNED: 500":
         Statuscode = True
     if Statuscode == False:
         print (decoded)
