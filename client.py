@@ -21,7 +21,7 @@ US.init()
 # Starting client
 while True:
     US.sendpacket("CONNECTED: 1000", IP, PORT)
-    if input("Do you want to send a message? [Y/N(N will also refresh msges)]").higher() == "y":
+    if input("Do you want to send a message? [Y/N(N will also refresh msges)]").lower() == "y":
         # SENDING DATA
         Send_data = input("What MSG do you want to send?: ")
         US.sendpacket(Send_data, IP, PORT)
