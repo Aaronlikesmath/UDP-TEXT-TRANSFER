@@ -1,8 +1,6 @@
 import json
 
 class JsonWrap(object):
-    # def __init__(self, filename):
-    #     self.filename = filename
     def __init__(self, filename):
         self.filename = filename
 
