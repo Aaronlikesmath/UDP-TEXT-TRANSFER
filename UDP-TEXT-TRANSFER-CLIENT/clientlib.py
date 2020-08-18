@@ -1,6 +1,5 @@
 from socketUtils import UdpSocket
 from myutils import JsonWrap
-import multiprocessing
 from datetime import datetime
 
 class UDPTEXTCLIENT(object):
@@ -13,7 +12,6 @@ class UDPTEXTCLIENT(object):
         self.US = UdpSocket([self.HostIP, self.port])
         self.US.init()
         self.US.sendpacket("CONNECTED: 1000", self.IP, self.port)
-        self.msgup = multiprocessing.Process(target=self.msgupdate)
 
     def msgupdate(self):
         data, address = self.US.s.recvfrom(4096)
@@ -40,11 +38,7 @@ class UDPTEXTCLIENT(object):
             return (f"\nMessage: {msg} \nFrom: {sendrIP} \n")
     
     def messagehandler(self):
-        self.msgup.start()
-        self.msgup.join(2)
-        if self.msgup.is_alive():
-            self.msgup.terminate()
-            return
+        self.msgupdate()
         out = self.msgparse(self.packet)
         return out
 
