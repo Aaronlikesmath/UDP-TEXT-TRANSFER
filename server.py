@@ -35,17 +35,17 @@ while True:
     # Adding Ip address to list if received connection packet and IP not already in list
     if decoded_data == "CONNECTED: 1000":
         if IPadress in IPlist:
-            IPlist = IPlist.append(IPIPadress = IPadress)
+            IPlist = IPlist.append(IPadress)
     elif decoded_data == "Return: 500":
-        US.sendpacket("Returned: 400", IPIPadress = IPadress, RelayPort)
+        US.sendpacket("Returned: 400", IPadress, RelayPort)
     else:
         # Printing data of received packet
-        US.sendpacket("RECEIVED: 1100", IPIPadress = IPadress, 12000)
-        print (f"\n \n Received: {decoded_data} \n From: {IPIPadress = IPadress} \n Time: {datetime.now()} \n \n")
-        relaymsg = f"\nMessage: {decoded_data} \n From: {IPIPadress = IPadress}"
+        US.sendpacket("RECEIVED: 1100", IPadress, 12000)
+        print (f"\n \n Received: {decoded_data} \n From: {IPadress} \n Time: {datetime.now()} \n \n")
+        relaymsg = f"\nMessage: {decoded_data} \n From: {IPadress}"
         # Relaying data to other clients
         for Ipadd in IPlist:
-            if Ipadd == IPIPadress == IPadress:
+            if Ipadd == IPadress:
                 break
             US.sendpacket(relaymsg, Ipadd, RelayPort)
         print (IPlist)
