@@ -28,4 +28,8 @@ while True:
         print (f"Sent: {Send_data} \n Time: {datetime.now()}")
     # This code will parse and receive DATA
     data, address = US.s.recvfrom(4096)
-    print (data.decode("utf-8"))
+    decoded = data.decode("utf-8")
+    if decoded == "RECEIVED: 1100":
+        print ("\nMessage has been delivered\n")
+    else:
+        print (decoded)

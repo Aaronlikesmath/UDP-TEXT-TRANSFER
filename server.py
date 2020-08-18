@@ -36,6 +36,7 @@ while True:
             IPlist = IPlist.append(templist[0])
     else:
         # Printing data of received packet
+        US.sendpacket("RECEIVED: 1100", templist[0], 12000)
         print (f"\n \n Received: {decoded_data} \n From: {templist[0]} \n Time: {datetime.now()} \n \n")
         relaymsg = f"\nMessage: {decoded_data} \n From: {templist[0]}"
         # Relaying data to other clients
