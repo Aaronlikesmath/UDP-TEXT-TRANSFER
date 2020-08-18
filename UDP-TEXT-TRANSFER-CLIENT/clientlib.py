@@ -29,15 +29,15 @@ class UDPTEXTCLIENT(object):
         sendrIP = templist[0]
         # Look for status codes
         if msg == "RETURNED: 400":
-            print (f"Pinged server at {datetime.now()}")
+            return (f"Pinged server at {datetime.now()}")
             statuscode = True
 
         elif msg == "RECEIVED: 1100":
-            print (f"Server received MSG at {datetime.now()}")
+            return (f"Server received MSG at {datetime.now()}")
             statuscode = True
 
         elif statuscode == False:
-            print (f"\nMessage: {msg} \nFrom: {sendrIP} \n")
+            return (f"\nMessage: {msg} \nFrom: {sendrIP} \n")
     
     def messagehandler(self):
         self.msgup.start()
@@ -45,7 +45,8 @@ class UDPTEXTCLIENT(object):
         if self.msgup.is_alive():
             self.msgup.terminate()
             return
-        self.msgparse(self.packet)
+        out = self.msgparse(self.packet)
+        return out
 
     def sendmsg(self, msg):
         self.US.sendpacket(msg, self.IP, self.port)

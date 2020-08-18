@@ -7,7 +7,8 @@ while True:
     if select.lower() == "m":
         msg = input("\nWhat should the msg be?: ")
         UTEXT.sendmsg(msg)
-        UTEXT.messagehandler()
+        print (UTEXT.messagehandler())
 
     elif select.lower() == "s":
-        UTEXT.messagehandler()
+        print (UTEXT.messagehandler())
+    
