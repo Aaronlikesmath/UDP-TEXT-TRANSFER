@@ -27,9 +27,13 @@ while True:
         US.sendpacket(Send_data, IP, PORT)
         print (f"Sent: {Send_data} \n Time: {datetime.now()}")
     # This code will parse and receive DATA
+    # Asking for return packet (Just to make sure that the recvfrom doesnt get stuck until there new messages)
+    US.sendpacket("Return: 500", IP, PORT)
     data, address = US.s.recvfrom(4096)
     decoded = data.decode("utf-8")
     if decoded == "RECEIVED: 1100":
         print ("\nMessage has been delivered\n")
+    elif decoded == "Returned: 400":
+        print ("\n Server Pinged \n")
     else:
         print (decoded)

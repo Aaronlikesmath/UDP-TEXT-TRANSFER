@@ -3,6 +3,7 @@ from datetime import datetime
 import socket
 from myutils import JsonWrap
 from socketUtils import UdpSocket
+import time
 
 
 # Setting port
@@ -34,6 +35,8 @@ while True:
     if decoded_data == "CONNECTED: 1000":
         if templist[0] in IPlist == False:
             IPlist = IPlist.append(templist[0])
+    elif decoded_data == "Return: 500":
+        US.sendpacket("Returned: 400", templist[0], RelayPort)
     else:
         # Printing data of received packet
         US.sendpacket("RECEIVED: 1100", templist[0], 12000)
