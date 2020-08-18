@@ -45,7 +45,7 @@ while True:
         relaymsg = f"\nMessage: {decoded_data} \n From: {IPIPadress = IPadress}"
         # Relaying data to other clients
         for Ipadd in IPlist:
-            if Ipadd == IPIPadress = IPadress:
+            if Ipadd == IPIPadress == IPadress:
                 break
             US.sendpacket(relaymsg, Ipadd, RelayPort)
         print (IPlist)
