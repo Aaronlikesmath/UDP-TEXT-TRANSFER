@@ -1,25 +1,10 @@
-from socketUtils import UdpSocket
 from myutils import JsonWrap
 from datetime import datetime
 
-class UDPTEXTCLIENT(object):
-    def __init__(self, conf_file):
-        self.JS = JsonWrap(conf_file)
-        self.HostIP = self.JS.openjsvar("HostIP")
-        self.HostPort = self.JS.openjsvar("HostPort")
-        self.IP = self.JS.openjsvar("IP")
-        self.port = self.JS.openjsvar("Port")
-        self.US = UdpSocket([self.HostIP, self.port])
-        self.US.init()
-        self.US.sendpacket("CONNECTED: 1000", self.IP, self.port)
+class UDPTEXTPARSE(object):
 
-    def msgupdate(self):
-        data, address = self.US.s.recvfrom(4096)
-        self.packet = [data, address]
-
-    def msgparse(self, packet):
+    def messagehandler(self, data, address):
         statuscode = False
-        data, address = packet
         # Decode the utf-8 data
         msg = data.decode("utf-8")
         # Parse the address
@@ -36,11 +21,3 @@ class UDPTEXTCLIENT(object):
 
         elif statuscode == False:
             return (f"\nMessage: {msg} \nFrom: {sendrIP} \n")
-    
-    def messagehandler(self):
-        self.msgupdate()
-        out = self.msgparse(self.packet)
-        return out
-
-    def sendmsg(self, msg):
-        self.US.sendpacket(msg, self.IP, self.port)

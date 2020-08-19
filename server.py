@@ -46,4 +46,6 @@ while True:
         for Ipadd in IPlist:
             if Ipadd != IPadress:
                 US.sendpacket(relaymsg, Ipadd, RelayPort)
+        time.sleep(0.05)
         US.sendpacket("RECEIVED: 1100", IPadress, 12000)
+        print ("Send confirmation packet")
