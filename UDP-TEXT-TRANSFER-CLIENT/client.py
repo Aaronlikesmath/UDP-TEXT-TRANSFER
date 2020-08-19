@@ -44,7 +44,7 @@ while True:
             data, address = US.s.recvfrom(4096)
             e_public_key = data.decode("utf-8")
         elif select.lower() == "ex":
-            US.sendpacket(public_key, IP, port)
+            US.sendpacket(str(public_key), IP, port)
         elif select.lower() == "d":
             data, address = US.s.recvfrom(4096)
             msg = rsa.decrypt(data.decode("utf-8"), private_key)
